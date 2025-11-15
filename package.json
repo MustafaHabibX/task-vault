@@ -1,0 +1,29 @@
+{
+  "name": "task-vault",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustafaHabibX/task-vault.git"
+  },
+  "keywords": [],
+  "author": "Mustafa Habib",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MustafaHabibX/task-vault/issues"
+  },
+  "homepage": "https://github.com/MustafaHabibX/task-vault#readme",
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.11"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.0"
+  }
+}

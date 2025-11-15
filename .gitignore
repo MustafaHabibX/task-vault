@@ -89,3 +89,5 @@ public/uploads/
 tmp/
 temp/
 /generated/prisma
+
+/src/generated/prisma
