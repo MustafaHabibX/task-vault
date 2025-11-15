@@ -2,9 +2,10 @@
   "name": "task-vault",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/MustafaHabibX/task-vault#readme",
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "nodemon": "^3.1.11"
   },
