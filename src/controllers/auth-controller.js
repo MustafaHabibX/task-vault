@@ -1,10 +1,10 @@
 import * as authService from "../services/auth-service.js";
 import * as otpService from "../services/otp-service.js";
 
-// Register ****************************************************************
+// * Register ****************************************************************
 
 export function showRegisterForm(req, res) {
-  res.send("GET /register called");
+  res.send("GET /auth/register called");
 }
 
 export async function registerUser(req, res) {
@@ -28,4 +28,13 @@ export async function registerUser(req, res) {
       .status(500)
       .json({ error: "Internal server error.", errorDetail: err });
   }
+}
+
+// * OTP *********************************************************************
+export async function showOTPForm(req, res) {
+  res.send("GET /auth/verify-otp called");
+}
+
+export async function verifyOTP(req, res) {
+  res.send("POST /auth/verify-otp called");
 }
