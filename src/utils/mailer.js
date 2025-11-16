@@ -24,15 +24,11 @@ export default async function sendMail(toEmailAddress, subject, bodyText) {
     const mailURL = `Preview URL: ${nodeMailer.getTestMessageUrl(mailResult)}`;
 
     return {
-      mailSentStatus: "Email sent successfully.",
       mailURL: mailURL,
-      mailResult: mailResult,
     };
   } catch (err) {
     return {
       mailSentStatus: ` Error sending email: \n, ${err}`,
-      mailURL: "URL unavailable",
-      mailResult: "Error!",
     };
   }
 }
