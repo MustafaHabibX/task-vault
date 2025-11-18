@@ -36,5 +36,15 @@ export async function showOTPForm(req, res) {
 }
 
 export async function verifyOTP(req, res) {
-  res.send("POST /auth/verify-otp called");
+  try {
+    // Getting the user's entered OTP
+    const { email, otp } = req.body;
+
+    const otpValidateResult = await otpService.validateOTP(email, otp);
+
+    res.status(otpValidateResult.status ?? null).json(otpValidateResult);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error." });
+  }
 }
