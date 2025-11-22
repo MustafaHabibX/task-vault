@@ -61,7 +61,7 @@ export async function loginUser(req, res) {
 
     const result = await authService.loginUser(email, password);
 
-    return result;
+    return res.status(result.status).json(result);
   } catch (err) {
     console.error("Login error:", err);
     return res.status(500).json({ error: "Internal server error." });
