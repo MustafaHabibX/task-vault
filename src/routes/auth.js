@@ -1,6 +1,7 @@
 import express from "express";
 import * as authController from "../controllers/auth-controller.js";
 import { validateRegister } from "../middlewares/validate-register.js";
+import { validateLogin } from "../middlewares/validate-login.js";
 
 const router = express.Router();
 
@@ -17,6 +18,6 @@ router.post("/verify-otp", authController.verifyOTP);
 // * Login *******************************************************************
 router.get("/login", authController.showLoginForm);
 
-router.post("/login", authController.validateLogin);
+router.post("/login", validateLogin, authController.validateLogin);
 
 export default router;
