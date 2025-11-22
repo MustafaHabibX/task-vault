@@ -55,6 +55,15 @@ export async function showLoginForm(req, res) {
   res.send("GET /auth/login called");
 }
 
-export async function validateLogin(req, res) {
-  res.send("POST /auth/login called");
+export async function loginUser(req, res) {
+  try {
+    const { email, password } = req.body;
+
+    const result = await authService.loginUser(email, password);
+
+    return result;
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({ error: "Internal server error." });
+  }
 }

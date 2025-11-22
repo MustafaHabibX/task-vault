@@ -18,6 +18,6 @@ router.post("/verify-otp", authController.verifyOTP);
 // * Login *******************************************************************
 router.get("/login", authController.showLoginForm);
 
-router.post("/login", validateLogin, authController.validateLogin);
+router.post("/login", validateLogin, authController.loginUser);
 
 export default router;
