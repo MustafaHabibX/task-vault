@@ -48,3 +48,13 @@ export async function verifyOTP(req, res) {
     res.status(500).json({ error: "Internal server error." });
   }
 }
+
+// * Login *********************************************************************
+
+export async function showLoginForm(req, res) {
+  res.send("GET /auth/login called");
+}
+
+export async function validateLogin(req, res) {
+  res.send("POST /auth/login called");
+}
