@@ -1,10 +1,13 @@
 import { Queue } from "bullmq";
 
 // Redis connection configuration
-const connection = {
+export const connection = {
   host: "127.0.0.1",
   port: 6379, // default Redis port
 };
 
-// Create a queue named "jobs"
-export const jobQueue = new Queue("jobs", { connection });
+// Name of the queue
+export const jobQueueName = "jobs";
+
+// Create a BullMQ queue instance
+export const jobQueue = new Queue(jobQueueName, { connection });
