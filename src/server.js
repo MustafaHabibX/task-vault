@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
+import jobRoutes from "./routes/jobs.js";
 import bodyParser from "body-parser";
 
 // Importing the .env
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for form data
 app.use(bodyParser.json()); // for JSON bodies
 
 app.use("/auth", authRoutes);
+app.use("/jobs", jobRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {
