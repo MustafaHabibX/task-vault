@@ -27,10 +27,10 @@ export async function createJob(req, res) {
   );
 
   // The jobID that came from the DB
-  const dbJobID = result.job.id;
+  const dbJob = result.job;
 
   // Push the job into BullMQ queue
-  jobQueue.add("create-job", { dbJobID });
+  await jobQueue.add("newJob", { jobId: dbJob.id });
 
   return res.status(result.status).json({ message: result.message });
 }
