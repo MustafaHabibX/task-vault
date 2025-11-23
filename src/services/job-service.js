@@ -19,7 +19,6 @@ export async function getAllJobs(userID) {
   }
 }
 
-// Temporary implementation
 export async function createJob(
   userID,
   inputName,
@@ -27,7 +26,6 @@ export async function createJob(
   inputStatus
 ) {
   try {
-    console.log(inputStatus);
     const status =
       inputStatus && JobStatus[inputStatus.toUpperCase()]
         ? JobStatus[inputStatus.toUpperCase()]
@@ -44,9 +42,13 @@ export async function createJob(
       },
     });
 
-    return { status: 200 };
+    return {
+      status: 200,
+      message: "Job created successfully",
+      job: result,
+    };
   } catch (err) {
     console.error("An error occured creating a new job.", err);
-    return { status: 400 };
+    return { status: 400, message: "An error occured creating a new job." };
   }
 }
