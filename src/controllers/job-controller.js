@@ -1,4 +1,5 @@
 import * as jobService from "../services/job-service.js";
+import { jobQueue } from "../queue/job-queue.js";
 
 export async function getJobs(req, res) {
   const loggedInUserID = req.user.id;
@@ -17,7 +18,7 @@ export async function createJob(req, res) {
   // Get user inputs
   const { name, description, status } = req.body;
 
-  // A simple implementation for testing
+  // Store the given job to the DB
   const result = await jobService.createJob(
     loggedInUserID,
     name,
@@ -25,5 +26,11 @@ export async function createJob(req, res) {
     status
   );
 
-  return res.status(result.status).json(result);
+  // The jobID that came from the DB
+  const dbJobID = result.job.id;
+
+  // Push the job into BullMQ queue
+  jobQueue.add("create-job", { dbJobID });
+
+  return res.status(result.status).json({ message: result.message });
 }
