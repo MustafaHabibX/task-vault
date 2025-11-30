@@ -18,7 +18,7 @@ const worker = new Worker(
     console.log(`Processing/Running job ID: ${jobId} ...`);
 
     // Simulate work, currently we use timeout with 10seconds
-    await new Promise((resolve) => setTimeout(resolve, 20000));
+    await new Promise((resolve) => setTimeout(resolve, 30000));
 
     // Mark the job as COMPLETED, because job processing is finished
     await prisma.job.update({

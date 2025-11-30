@@ -12,4 +12,7 @@ router.get("/", authenticateJWT, jobController.getJobs);
 // * Create a new Jobs
 router.post("/", authenticateJWT, jobController.createJob);
 
+// * Get the details of a specific job
+router.get("/:id", authenticateJWT, jobController.getSpecificJob);
+
 export default router;

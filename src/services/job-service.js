@@ -52,3 +52,25 @@ export async function createJob(
     return { status: 400, message: "An error occured creating a new job." };
   }
 }
+
+export async function getSpecificJob(userID, jobID) {
+  console.log(userID, jobID);
+  try {
+    const jobs = await prisma.job.findFirst({
+      where: { id: jobID, userId: userID },
+    });
+
+    if (!jobs) {
+      return { status: 400, error: "The entered Job does not exist." };
+    }
+
+    return { status: 200, message: "Request Successfully procced.", jobs };
+  } catch (err) {
+    console.error("Error occured when fetching jobs.", err);
+    return {
+      status: 400,
+      error: "Error occured when fetching jobs.",
+      jobs: null,
+    };
+  }
+}
