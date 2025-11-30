@@ -50,7 +50,6 @@ export async function verifyOTP(req, res) {
 }
 
 // * Login *********************************************************************
-
 export async function showLoginForm(req, res) {
   res.send("GET /auth/login called");
 }
@@ -61,7 +60,22 @@ export async function loginUser(req, res) {
 
     const result = await authService.loginUser(email, password);
 
-    return res.status(result.status).json(result);
+    if (result.error) {
+      return res.status(result.status).json({ error: result.error });
+    }
+
+    // Set the JWT in a secure HTTP-only cookie
+    res.cookie("token", result.jwtToken, {
+      httpOnly: true,
+      secure: false, // set this property true in production (HTTPS)
+      sameSite: "strict",
+      maxAge: 10 * 60 * 60 * 1000, // 10 hours life for the cookie
+    });
+
+    return res.status(200).json({
+      status: 200,
+      message: "Login successful",
+    });
   } catch (err) {
     console.error("Login error:", err);
     return res.status(500).json({ error: "Internal server error." });

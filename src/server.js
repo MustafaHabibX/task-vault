@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import jobRoutes from "./routes/jobs.js";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 // Importing the .env
 dotenv.config();
 
 const app = express();
 
+app.use(cookieParser()); // For the JWT that is stored in the cookie
 app.use(bodyParser.urlencoded({ extended: true })); // for form data
 app.use(bodyParser.json()); // for JSON bodies
 

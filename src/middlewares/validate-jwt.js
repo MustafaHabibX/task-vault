@@ -1,18 +1,17 @@
 import jwt from "jsonwebtoken";
 
 export function authenticateJWT(req, res, next) {
-  const authHeader = req.headers.authorization;
+  // Get JWT token from cookies
+  const token = req.cookies.token;
 
-  if (!authHeader) {
-    return res.status(401).json({ error: "Authorization header missing." });
+  if (!token) {
+    return res.status(401).json({ error: "Token missing." });
   }
-
-  const token = authHeader.split(" ")[1]; // Bearer <token>
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = { id: decoded.id, email: decoded.email }; // attach user's info to request
+    req.user = { id: decoded.id, email: decoded.email }; // attach user's info
 
     next();
   } catch (err) {

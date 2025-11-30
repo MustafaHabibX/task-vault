@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/server.js",
+    "worker": "nodemon src/workers/job-worker.cjs"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "bullmq": "^5.64.1",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
