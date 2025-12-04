@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -33,9 +34,9 @@ model OTP {
 
 enum JobStatus {
   PENDING
+  STARTED
   RUNNING
   COMPLETED
-  FAILED
 }
 
 model Job {
@@ -52,13 +53,11 @@ model Job {
   jobResult JobResult?
 }
 
-
 model JobResult {
-  id Int @id @default(autoincrement())
-  job   Job   @relation(fields: [jobId], references: [id])
-  jobId Int @unique
-  output String?
-  errorMessage String?
-  completedAt DateTime?
-  updatedAt DateTime @updatedAt
+  id           Int        @id @default(autoincrement())
+  job          Job        @relation(fields: [jobId], references: [id])
+  jobId        Int        @unique
+
+  status       JobStatus  @default(STARTED)
+  updatedAt    DateTime   @updatedAt
 }
