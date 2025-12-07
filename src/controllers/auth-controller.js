@@ -61,20 +61,14 @@ export async function loginUser(req, res) {
     const result = await authService.loginUser(email, password);
 
     if (result.error) {
-      return res.status(result.status).json({ error: result.error });
+      return res
+        .status(result.status)
+        .json({ status: result.status, error: result.error });
     }
 
-    // Set the JWT in a secure HTTP-only cookie
-    res.cookie("token", result.jwtToken, {
-      httpOnly: true,
-      secure: false, // set this property true in production (HTTPS)
-      sameSite: "strict",
-      maxAge: 10 * 60 * 60 * 1000, // 10 hours life for the cookie
-    });
-
+    //  Return the JWT token
     return res.status(200).json({
-      status: 200,
-      message: "Login successful",
+      token: result.jwtToken,
     });
   } catch (err) {
     console.error("Login error:", err);
