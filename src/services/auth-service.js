@@ -5,6 +5,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export async function registerUser(email, password) {
+  // If the user is already registered
+  const existing = await prisma.user.findUnique({ where: { email: email } });
+  if (existing) {
+    return { status: 400, error: "User is already registered" };
+  }
   // Get the hash of the plainText password
   const hashedPassword = await hashPassword(password);
 
